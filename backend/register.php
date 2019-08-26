@@ -3,6 +3,7 @@
 session_start();
 
 require_once '../app/Database.php';
+require_once '../vendor/autoload.php';
 
 $message = [];
 if(isset($_POST['register']))
@@ -22,6 +23,24 @@ if(isset($_POST['register']))
   ]);
 
   if($result){
+    // Create the Transport
+    $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
+    ->setUsername('6679bad318a260')
+    ->setPassword('0295670bf2b53f')
+    ;
+
+    // Create the Mailer using your created Transport
+    $mailer = new Swift_Mailer($transport);
+
+    // Create a message
+    $messag = (new Swift_Message('Registation Successfull'))
+    ->setFrom(['mdsaifakib@gmail.com' => 'PHP PROJECT SYSTEM'])
+    ->setTo([$email => $username])
+    ->setBody('You are registered . plase  visit the following link to login')
+    ;
+
+    // Send the message
+    $result = $mailer->send($messag);
     $message['success'] = 'Registation Successfull';
   }
   else{
