@@ -20,6 +20,12 @@ $message = [];
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Datatable css -->
+    <link href="../assets/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../assets/css/buttons.bootstrap4.min" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="../assets/css/app.css" rel="stylesheet">
   </head>

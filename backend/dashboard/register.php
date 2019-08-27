@@ -46,10 +46,7 @@ if(isset($_POST['register']))
   else{
    $message['warning'] = 'Registation Failed';
   }
-  
 }
-
-
 ?>
 
 <!doctype html>
