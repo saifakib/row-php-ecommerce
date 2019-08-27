@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once '../app/Database.php';
-require_once '../vendor/autoload.php';
+require_once '../../app/Database.php';
+require_once '../../vendor/autoload.php';
 
 $message = [];
 if(isset($_POST['register']))
@@ -23,7 +23,7 @@ if(isset($_POST['register']))
   ]);
 
   if($result){
-    // Create the Transport
+    // Create the Transport smtp server
     $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
     ->setUsername('6679bad318a260')
     ->setPassword('0295670bf2b53f')
@@ -61,16 +61,16 @@ if(isset($_POST['register']))
     <title>Signin</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/auth.css" rel="stylesheet">
+    <link href="../assets/css/auth.css" rel="stylesheet">
   </head>
 
   <body class="text-center">
     <form action="" method="post" class="form-signin">
 
-      <?php include_once 'partials/message.php' ?>
+      <?php include_once '../partials/message.php' ?>
       
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <input type="email" name="email" class="form-control m-3" placeholder="Email address" required >

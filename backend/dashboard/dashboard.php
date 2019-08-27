@@ -1,17 +1,15 @@
 <?php
 
-session_start();
-
 //echo $_SESSION['email'] .'are logged in';
 
 ?>
 
-<?php include_once 'partials/header.php' ?>
+<?php include_once '../partials/header.php' ?>
 
     <div class="container-fluid">
       <div class="row">
 
-          <?php  include_once 'partials/sidebar.php'?>
+          <?php  include_once '../partials/sidebar.php'?>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
@@ -162,6 +160,6 @@ session_start();
       </div>
     </div>
 
-<?php include_once 'partials/footer.php' ?>
+<?php include_once '../partials/footer.php' ?>
 
 

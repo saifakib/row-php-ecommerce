@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once '../app/Database.php';
+require_once '../../app/Database.php';
 
 $message = [];
 if(isset($_POST['login']))
@@ -50,16 +50,16 @@ if(isset($_POST['login']))
     <title>Login</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/auth.css" rel="stylesheet">
+    <link href="../assets/css/auth.css" rel="stylesheet">
   </head>
 
   <body class="text-center">
     <form action="" method="post" class="form-signin">
 
-      <?php include_once 'partials/message.php' ?>
+      <?php include_once '../partials/message.php' ?>
       
       <h1 class="h3 mb-3 font-weight-normal">Login</h1>
       <input type="email" name="email" class="form-control m-3" placeholder="Email address" required >

@@ -1,3 +1,10 @@
+
+<?php
+session_start();
+
+require_once '../../vendor/autoload.php';
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -7,10 +14,10 @@
     <title>Dashboard</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/app.css" rel="stylesheet">
+    <link href="../assets/css/app.css" rel="stylesheet">
   </head>
 
   <body>
