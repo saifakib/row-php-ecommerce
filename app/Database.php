@@ -40,25 +40,34 @@ class Database
         return $stmt->execute();
     }
 
-    public function select($table, $columns = '*', $data){
-        $sql = 'SELECT '.$columns.' FROM '.$table;
 
-        $string = [];
-        foreach($data as $keys => $values){
-            $string[] = "`{$keys}` = :{$keys}";   //placeholder will never ba string
+    public function select($table, $columns = '*', array $data = [])
+    {
+        $query = 'SELECT '.$columns.' FROM '.$table;
+
+        if (! empty($data)) {
+            $string = [];
+            foreach ($data as $key => $value) {
+                $string[] = "`{$key}` = :{$key}"; // placeholder will never be string
+            }
+            $query .= ' WHERE '.implode(',', $string);
         }
 
-        $sql .= ' WHERE '.implode(',', $string);
-
-        $this->stmt = $this->connection->prepare($sql);
-
-        foreach ($data as $placeholder => $value) {
-            $this->stmt->bindParam(':'.$placeholder, $value);
+        $this->stmt = $this->connection->prepare($query);
+        
+        foreach ($data as $placeholder => $val) {
+            $this->stmt->bindParam(':'.$placeholder, $val);
         }
 
         return $this->stmt;
+    }
 
-
+    public function delete($table, $id)
+    {
+        $sql = 'DELETE FROM '.$table.' WHERE id=:id';
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':id',$id);
+        return $stmt->execute();
     }
     
 }
@@ -69,6 +78,11 @@ define('DB_USER','php-ecommerce');
 define('DB_PASSWORD','php-ecommerce-2019');
 
 $connection = new Database(DSN, DB_USER, DB_PASSWORD);
+/* $re = $connection->select('roles');
+$re->execute();
+$d = $re->fetch();
+var_dump($d);die(); */
+
 
 
 ?>

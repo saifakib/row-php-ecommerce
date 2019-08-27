@@ -1,36 +1,33 @@
- <?php
- $site_url = 'localhost/php-ecommerce/backend';
- ?>
- 
+
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="<?php echo $site_url; ?>/dashboard.php">
+            <li class="nav-item">
+                <a class="nav-link active" href="<?php echo $site_url; ?>/dashboard/dashboard.php">
                   <span data-feather="home"></span>
                   Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="<?php echo $site_url; ?>/dashboard.php">
+                <a class="nav-link active" href="dashboard/dashboard.php">
                   <span data-feather="home"></span>
                   Dashboard <span class="sr-only">(current)</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="//www.facebook.com"/>
+                <a class="nav-link" href="/">
                   <span data-feather="file"></span>
                   Orders
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo $site_url; ?>/roles/index.php">
+                <a class="nav-link" href="../roles/index.php">
                   <span data-feather="file"></span>
                   Roles
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?php echo $site_url; ?>/permissions/index.php">
+                <a class="nav-link" href="../permissions/index.php">
                   <span data-feather="file"></span>
                   Permissions
                 </a>

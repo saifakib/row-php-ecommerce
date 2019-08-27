@@ -2,7 +2,11 @@
 <?php
 session_start();
 
+$site_url = 'http://php-ecommerce/backend';
+
+require_once '../../app/Database.php';
 require_once '../../vendor/autoload.php';
+$message = [];
 ?>
 
 <!doctype html>
@@ -11,7 +15,7 @@ require_once '../../vendor/autoload.php';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Dashboard</title>
+    <title>PHP ECOMMERCE </title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +32,7 @@ require_once '../../vendor/autoload.php';
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="logout.php">logout</a>
-        </li>
+<!--       <a class="nav-link" href="<?php echo $site_url; ?>/dashboard/logout.php">Logout</a>-->        </li>
       </ul>
     </nav>
   

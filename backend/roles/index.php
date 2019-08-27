@@ -1,29 +1,19 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php 
 
-    <title>Roles</title>
+require_once '../partials/header.php';
 
-    <!-- Bootstrap core CSS -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+$result = $connection->select('roles');
+$result->execute();
 
-    <!-- Custom styles for this template -->
-    <link href="../assets/css/app.css" rel="stylesheet">
-  </head>
+if($result->rowCount() === 0){
+  echo 'data not avialable';
+}
+else{
+  $data = $result->fetchAll();
+}
+$count = 1;
 
-  <body>
-      
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">PHP ECOMMERCE</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="logout.php">logout</a>
-        </li>
-      </ul>
-    </nav>
+?>
   
     <div class="container-fluid">
       <div class="row">
@@ -46,11 +36,15 @@
           </div>
 
           <form class="form-group" style="width:500px;" action="" method="post">
-                <input type="text" class="form-control text-center" name="role" placeholder="Role">
-                <button type="submit" class="form-control btn btn-primary my-2" name="rolesubmit">Add</button>
+          <div id="alert" class="alert alert-success" style="display:none">
+          </div>
+                <input type="text" class="form-control text-center" id="role" placeholder="Role Name">
+                <button type="submit" class="form-control btn btn-success my-2" id="rolesubmit">Add Role</button>
           </form>
 
-
+          <?php
+            include_once '../partials/message.php';
+          ?>
           <h2>Roles</h2>
           <div class="table-responsive">
             <table class="table table-striped table-sm">
@@ -62,11 +56,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Lorem</td>
-                  <td>EDIT | DELETE</td>
+              <?php foreach($data as $role) {?> 
+                <tr style="font-size:18px;">
+                  <td><b><?php echo $count; $count++;?></b></td>
+                  <td><?php echo $role['name']; ?></td>
+                  <td>
+              <!--<a href="<?php echo $site_url;?>/roles/edit.php" class="btn btn-sm btn-info">Edit</a>--> 
+                    <a href="edit.php" class="btn btn-sm btn-info">Edit</a>                 
+                    <a onclick="confirm('Are You Sure ? ')" href="delete.php?id=<?php echo $role['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
+                  </td>
                 </tr>
+                <?php }?>
               </tbody>
             </table>
           </div>
@@ -74,12 +74,29 @@
       </div>
     </div>
 
+    <script>
+      let button = document.getElementById('rolesubmit');
+          button.addEventListener("click", function(e){
+            e.preventDefault();
 
-    <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+            const roleName = document.getElementById('role').value;
+            
+            let http = new XMLHttpRequest();
+            let url = 'create.php';
+            http.open("POST", url, true);
 
-    <!-- Icons -->
-    <script src="assets/js/feather.min.js"></script>
+            http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            http.onreadystatechange = function() { // Call a function when the state changes.
+                window.location.href="index.php";
+            }
+            http.send("Name=" + roleName);
+
+          })
+          
+    </script>
+
+
+    <?php require_once '../partials/footer.php' ?>
 </body>
 </html>
