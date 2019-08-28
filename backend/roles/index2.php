@@ -46,6 +46,17 @@ $count = 1;
                 </tr>
               </thead>
               <tbody>
+              <?php foreach($data as $role) {?> 
+                <tr style="font-size:18px;">
+                  <td><b><?php echo $count; $count++;?></b></td>
+                  <td><?php echo $role['name']; ?></td>
+                  <td>
+              <!--<a href="<?php echo $site_url;?>/roles/edit.php" class="btn btn-sm btn-info">Edit</a>--> 
+                    <a href="edit.php" class="btn btn-sm btn-info">Edit</a>                 
+                    <a onclick="confirm('Are You Sure ? ')" href="delete.php?id=<?php echo $role['id']; ?>" class="btn btn-sm btn-danger">Delete</a>
+                  </td>
+                </tr>
+                <?php }?>
               </tbody>
             </table>
           </div>
@@ -53,21 +64,7 @@ $count = 1;
       </div>
     </div>
 
-    <?php include_once '../partials/datatableJS.php' ?>
-
     <script>
-     // Datatable 
-      $(document).ready( function () {
-          $('#datatable').DataTable( {
-            dom: 'Bfrtp',
-            serverSide: true,
-            ajax: "http://localhost/php-ecommerce/backend/roles/json.php",
-            pageLength: 5,
-            buttons: [
-                'copy', 'excel', 'csv', 'pdf', 'print'
-            ]
-          } );
-      });
       let button = document.getElementById('rolesubmit');
           button.addEventListener("click", function(e){
             e.preventDefault();
