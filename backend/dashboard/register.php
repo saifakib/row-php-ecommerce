@@ -23,6 +23,44 @@ if(isset($_POST['register']))
   ]);
 
   if($result){
+
+    //Genete pdf
+    //first install mpdf/mpdf library and load
+    try{
+      $mpdf = new \Mpdf\Mpdf();
+    }catch(\Mpdf\MpdfException $e){
+    }
+
+    //here we can user another way to create pdf 
+    //create php file, desiging as email template and pass
+    //required information to this php file. 
+
+    //ob_start();
+    //$html = file_get_contents('pdf.php?email='.$username);
+    //ob_end_clean();
+    
+
+    ob_start();
+
+    echo 'Your Account Created successfully';
+    echo 'Email: '. $email;
+    echo 'Password: '. $password;
+    echo 'Username: '. $username;
+    echo 'Mobile number: '. $mobile_number;
+    echo '<br>';
+
+    $html = ob_get_contents();
+    ob_end_clean();
+
+    try{
+      $mpdf->WriteHTML(utf8_encode($html));
+      $content = $mpdf->Output('', 'S');  //output('name','file formet');
+    }catch(\Mpdf\MpdfException $e){}
+
+
+    // Create instance of Swift_Attachment with our PDF file
+    $attachment = new Swift_Attachment($content, 'account.pdf', 'application/pdf');
+
     // Create the Transport smtp server
     $transport = (new Swift_SmtpTransport('smtp.mailtrap.io', 25))
     ->setUsername('6679bad318a260')
@@ -37,11 +75,15 @@ if(isset($_POST['register']))
     ->setFrom(['mdsaifakib@gmail.com' => 'PHP PROJECT SYSTEM'])
     ->setTo([$email => $username])
     ->setBody('You are registered . plase  visit the following link to login')
+    ->attach($attachment)
     ;
 
     // Send the message
     $result = $mailer->send($messag);
     $message['success'] = 'Registation Successfull';
+
+    // Then, we can send PDF to the browser
+    $mpdf->Output('new.pdf' ,'I');
   }
   else{
    $message['warning'] = 'Registation Failed';
